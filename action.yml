@@ -1,0 +1,30 @@
+name: 'Yocto builder'
+description: 'Builds a bitbake target'
+inputs:
+  machine:
+    required: true
+    type: string
+  target:
+    required: true
+    type: string
+  templateconf:
+    required: false
+    type: string
+  extraconf:
+    required: false
+    type: string
+outputs:
+  targz:
+    description: 'Path to filesystem compressed tarball'
+  arch:
+    description: 'Target architectur'
+  kernel-version:
+    description: 'Linux kernel version'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.machine }}
+    - ${{ inputs.target }}
+    - ${{ inputs.templateconf }}
+    - ${{ inputs.extraconf }}
